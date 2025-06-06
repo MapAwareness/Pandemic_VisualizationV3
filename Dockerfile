@@ -3,7 +3,7 @@
 # Nous utilisons une image Python officielle qui inclut déjà les outils de développement
 # nécessaires pour compiler pandas et numpy
 #
-FROM python:3.11-slim
+FROM python:3.12.11-slim
 
 # Installation des packages nécessaires pour la compilation
 RUN apt-get update && apt-get install -y --no-install-recommends \
