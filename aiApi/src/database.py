@@ -1,8 +1,20 @@
 import mysql.connector
 from mysql.connector import errorcode
+import os
+from dotenv import load_dotenv
 
+# Charger les variables d'environnement
+load_dotenv()
 
-DATABASE_NAME = "original_pan"
+# Configuration depuis les variables d'environnement
+DATABASE_CONFIG = {
+    'host': os.getenv('DB_HOST', 'localhost'),
+    'user': os.getenv('DB_USER', 'root'),
+    'password': os.getenv('DB_PASSWORD', ''),
+    'port': int(os.getenv('DB_PORT', '3306'))
+}
+
+DATABASE_NAME = os.getenv('DB_NAME', 'original_pan')
 
 def get_database_connection(database_name=None):
     """
@@ -10,12 +22,11 @@ def get_database_connection(database_name=None):
     Si `database_name` est spécifié, connecte à cette base de données.
     """
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="kevin",  
-            password="mplb4451",  
-            database=database_name
-        )
+        config = DATABASE_CONFIG.copy()
+        if database_name:
+            config['database'] = database_name
+        
+        connection = mysql.connector.connect(**config)
         return connection
     except mysql.connector.Error as err:
         if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -60,3 +71,27 @@ def save_to_database(df, table_name, connection):
         sql = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
         cursor.execute(sql, tuple(row))
     connection.commit()
+
+# Fonction utilitaire pour tester la connexion
+def test_connection():
+    """
+    Teste la connexion à la base de données.
+    """
+    try:
+        connection = get_database_connection()
+        print("✅ Connexion à la base de données réussie!")
+        
+        cursor = connection.cursor()
+        cursor.execute("SELECT VERSION()")
+        version = cursor.fetchone()
+        print(f"Version MySQL: {version[0]}")
+        
+        connection.close()
+        return True
+    except Exception as e:
+        print(f"❌ Erreur de connexion: {e}")
+        return False
+
+if __name__ == "__main__":
+    # Test de la connexion
+    test_connection()
