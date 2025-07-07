@@ -12,7 +12,7 @@ class PandemicPredictionController extends Controller
      */
     public function index()
     {
-        return Inertia::render('pandemic-predictions');
+        return Inertia::render('pandemic/predictions');
     }
 
     /**

@@ -15,7 +15,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Prédictions Pandémie',
-        href: '/pandemic-predictions',
+        href: '/pandemic/predictions',
         icon: Activity,
     },
 ];

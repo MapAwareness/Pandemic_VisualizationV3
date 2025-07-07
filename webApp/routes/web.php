@@ -14,7 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     
     // Routes pour les prédictions de pandémie
-    Route::get('pandemic-predictions', [PandemicPredictionController::class, 'index'])->name('pandemic-predictions');
+    Route::get('pandemic/predictions', [PandemicPredictionController::class, 'index'])->name('predictions');
     Route::post('api/pandemic/predict', [PandemicPredictionController::class, 'predict'])->name('pandemic.predict');
     Route::post('api/pandemic/predict-total-cases', [PandemicPredictionController::class, 'predictTotalCases'])->name('pandemic.predict-total-cases');
     Route::get('api/pandemic/model-info', [PandemicPredictionController::class, 'getModelInfo'])->name('pandemic.model-info');
