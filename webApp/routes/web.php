@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PandemicPredictionController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,6 +20,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('api/pandemic/predict-total-cases', [PandemicPredictionController::class, 'predictTotalCases'])->name('pandemic.predict-total-cases');
     Route::get('api/pandemic/model-info', [PandemicPredictionController::class, 'getModelInfo'])->name('pandemic.model-info');
     Route::get('api/pandemic/processed-data', [PandemicPredictionController::class, 'getProcessedData'])->name('pandemic.processed-data');
+
+    // Routes pour le dashboard
+    Route::get('api/dashboard/stats', [DashboardController::class, 'getStats'])->name('dashboard.stats');
+    Route::get('api/pandemic/map-data', [DashboardController::class, 'getMapData'])->name('pandemic.map-data');
 });
 
 require __DIR__.'/settings.php';
