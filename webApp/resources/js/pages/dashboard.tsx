@@ -265,10 +265,10 @@ export default function Dashboard() {
                             </div>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                                     <span className="text-gray-900 dark:text-gray-100">Modèle ML</span>
                                 </div>
-                                <span className="text-sm text-yellow-600 dark:text-yellow-400">Entraînement</span>
+                                <span className="text-sm text-green-600 dark:text-green-400">Opérationnel</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center gap-3">
